@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const authMiddleware = require('./middlewares/authMiddleware');
-const db = require('../config/database');
+const authMiddleware = require('../middlewares/authMiddleware');
+const db = require('../config/db');
 
 // Réserver un projecteur seulement s’il en reste
 router.post('/reservations', authMiddleware, async (req, res) => {
