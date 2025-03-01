@@ -66,7 +66,7 @@ router.delete('/:id', async (req, res) => {
     try {
       // Vérifier si la réservation existe
       const [reservation] = await db.promise().query(
-        'SELECT * FROM reservations WHERE id = ?',
+        'SELECT * FROM reservation WHERE id = ?',
         [id]
       );
   
@@ -75,7 +75,7 @@ router.delete('/:id', async (req, res) => {
       }
   
       // Supprimer la réservation
-      await db.promise().query('DELETE FROM reservations WHERE id = ?', [id]);
+      await db.promise().query('DELETE FROM reservation WHERE id = ?', [id]);
   
       res.json({ message: 'Réservation annulée avec succès' });
     } catch (error) {
