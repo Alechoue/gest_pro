@@ -14,7 +14,7 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());  // Ceci permet à Express de parser les requêtes JSON
-app.use('/api/auth', authRoutes); // Routes d'authentification
+app.use('/api/auth.routes', authRoutes); // Routes d'authentification
 app.use('/api/projectors', projectorRoutes);
 app.use('/api/reservations', reservationRoutes);
 

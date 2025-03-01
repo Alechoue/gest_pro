@@ -1,8 +1,21 @@
 const express = require('express');
 const db = require('../config/db');
+const { authenticateUser, authorizeRole } = require('../middlewares/auth.middleware');
 
 const router = express.Router();
 
+
+// Route protégée : Seuls les utilisateurs authentifiés peuvent voir les projecteurs
+router.get('/', authenticateUser, async (req, res) => {
+    // Récupérer les projecteurs depuis la base
+    res.json({ message: 'Liste des projecteurs' });
+  });
+  
+  // Route d'ajout de projecteur (accessible uniquement aux administrateurs)
+  router.post('/', authenticateUser, authorizeRole('admin'), async (req, res) => {
+    res.json({ message: 'Projecteur ajouté avec succès' });
+  });
+  
 // Ajouter un projecteur
 router.post('/', async (req, res) => {
   const { name, status, availability } = req.body;
