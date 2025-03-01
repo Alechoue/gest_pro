@@ -7,12 +7,12 @@ const projectorRoutes = require('./routes/projecteur');
 const reservationRoutes = require('./routes/reservation');
 
 
-app.use('/api/projecteur', projectorRoutes);
 
 
 dotenv.config();
 const app = express();
 
+app.use('/api/projecteur', projectorRoutes);
 app.use(express.json());  // Ceci permet à Express de parser les requêtes JSON
 app.use('/api/auth.routes', authRoutes); // Routes d'authentification
 app.use('/api/projecteur', projectorRoutes);
