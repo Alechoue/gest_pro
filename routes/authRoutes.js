@@ -1,6 +1,6 @@
 const express = require('express');
 const { createUser } = require('../models/user.model');
-const authController = require('../controllers/auth.controller');  // Vérifie le chemin du contrôleur
+const authController = require('../controllers/authController');  // Vérifie le chemin du contrôleur
 
 const router = express.Router();
 router.post('/register', authController.register);  // Route pour l'inscription
