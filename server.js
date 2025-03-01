@@ -7,7 +7,6 @@ dotenv.config();
 
 const protectedRoutes = require('./routes/protectedRoutes');
 const accessRoutes = require('./routes/accessRoutes');
-const reservationRoutes = require('./routes/reservationRoutes');
 const authRoutes = require('./routes/auth.routes');
 const projectorRoutes = require('./routes/projectors');
 const reservationRoutes = require('./routes/reservations');
