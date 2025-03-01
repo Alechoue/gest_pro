@@ -39,4 +39,49 @@ router.post('/', async (req, res) => {
   }
 });
 
+
+// Récupérer toutes les réservations
+router.get('/', async (req, res) => {
+    try {
+      const [rows] = await db.promise().query(
+        `SELECT reservations.id, users.username, projectors.name AS projector_name, 
+                reservations.start_time, reservations.end_time
+         FROM reservations
+         JOIN users ON reservations.user_id = users.id
+         JOIN projectors ON reservations.projector_id = projectors.id`
+      );
+      
+      res.json(rows);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Erreur serveur' });
+    }
+  });
+
+
+  // Annuler une réservation
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      // Vérifier si la réservation existe
+      const [reservation] = await db.promise().query(
+        'SELECT * FROM reservations WHERE id = ?',
+        [id]
+      );
+  
+      if (reservation.length === 0) {
+        return res.status(404).json({ message: 'Réservation non trouvée' });
+      }
+  
+      // Supprimer la réservation
+      await db.promise().query('DELETE FROM reservations WHERE id = ?', [id]);
+  
+      res.json({ message: 'Réservation annulée avec succès' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Erreur serveur' });
+    }
+  });
+  
 module.exports = router;
