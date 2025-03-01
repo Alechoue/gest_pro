@@ -8,10 +8,12 @@ dotenv.config();
 const protectedRoutes = require('./routes/protectedRoutes');
 const accessRoutes = require('./routes/accessRoutes');
 const authRoutes = require('./routes/auth.routes');
-const projectorRoutes = require('./routes/projectors');
-const reservationRoutes = require('./routes/reservations');
+const projectorRoutes = require('./routes/projecteur');
+const reservationRoutes = require('./routes/reservation');
 
+dotenv.config();
 const app = express();
+
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
@@ -19,10 +21,10 @@ app.use('/api', protectedRoutes);
 app.use('/api/admin', accessRoutes);
 app.use('/api', reservationRoutes);
 app.use('/api/projectors', projectorRoutes);
+app.use('/api/projecteur', projectorRoutes);
 app.use(express.json());  // Ceci permet à Express de parser les requêtes JSON
 app.use('/api/auth.routes', authRoutes); // Routes d'authentification
-app.use('/api/projectors', projectorRoutes);
-app.use('/api/reservations', reservationRoutes);
+app.use('/api/reservation', reservationRoutes);
 
 app.get('/', (req, res) => {
   res.send('Welcome to the Projector Management !');
